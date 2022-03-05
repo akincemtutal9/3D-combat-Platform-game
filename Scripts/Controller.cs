@@ -9,8 +9,10 @@ public class Controller : MonoBehaviour
     public float rotationSpeed;
     float normalFov;
     public float sprintFov;
+    bool isGrounded;
 
     float maxSpeed;
+    [SerializeField] float jump;
     float inputX;
     float inputZ;
 
@@ -18,32 +20,38 @@ public class Controller : MonoBehaviour
 
     public Transform model;
 
+    [SerializeField] private LayerMask groundMask;
     Animator anim;
     Vector3 moveDirection;
     Camera mainCam;
+    Rigidbody rb;
+    CapsuleCollider cc;
+
 
     public KeyCode SprintButton = KeyCode.LeftShift;
 
     public KeyCode walkButton = KeyCode.C;
 
-
+    public KeyCode jumpButton = KeyCode.Space;
     void Start()
     {
         anim = GetComponent<Animator>();
         mainCam = Camera.main;
         normalFov = mainCam.fieldOfView;
-
+        rb = GetComponent<Rigidbody>();
+        cc = GetComponent<CapsuleCollider>();
+        //isGrounded = Physics.CheckCapsule(cc.bounds.center, new Vector3(cc.bounds.center.x, cc.bounds.min.y - 0.1f, cc.bounds.center.z), 0.18f);
     }
 
     // Update is called once per frame
     private void LateUpdate()
     {
-      
-
+        isGrounded = Physics.CheckCapsule(cc.bounds.center, new Vector3(cc.bounds.center.x, cc.bounds.min.y - 0.1f, cc.bounds.center.z), 0.18f,groundMask);
         InputMove();
         InputRotation();
         Movement();
-    
+        if (isGrounded) { Jump(); }
+        
     
     }
     void Movement()
@@ -86,5 +94,14 @@ public class Controller : MonoBehaviour
         rotOfSet.y = 0;
 
         model.forward = Vector3.Slerp(model.forward, rotOfSet, Time.deltaTime * rotationSpeed); 
+    }
+    
+    void Jump()
+    {
+        if (Input.GetKey(jumpButton))
+        {
+            rb.AddForce(Vector3.up * jump);
+        }
+
     }
 }
