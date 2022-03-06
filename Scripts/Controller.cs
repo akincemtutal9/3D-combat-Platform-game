@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
-    
+
     public float damp;
-    [Range(1,20)]
+    [Range(1, 20)]
     public float rotationSpeed;
     [Range(1, 20)]
     public float strafeTurnSpeed;
 
     float normalFov;
     public float sprintFov;
+    
+    
     bool isGrounded;
+    
 
     float maxSpeed;
     [SerializeField] float jump;
@@ -30,6 +33,7 @@ public class Controller : MonoBehaviour
     Camera mainCam;
     Rigidbody rb;
     CapsuleCollider cc;
+    
 
 
     public KeyCode SprintButton = KeyCode.LeftShift;
@@ -43,12 +47,12 @@ public class Controller : MonoBehaviour
     };
 
     public MovementType movementType;
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -62,13 +66,13 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        isGrounded = Physics.CheckCapsule(cc.bounds.center, new Vector3(cc.bounds.center.x, cc.bounds.min.y - 0.1f, cc.bounds.center.z), 0.18f,groundMask);
+        isGrounded = Physics.CheckCapsule(cc.bounds.center, new Vector3(cc.bounds.center.x, cc.bounds.min.y - 0.1f, cc.bounds.center.z), 0.18f, groundMask);
         InputMove();
         InputRotation();
         Movement();
-        if (isGrounded) { Jump(); }
-        
-    
+        if (isGrounded&&Input.GetKeyDown(jumpButton)) {Jump();}
+
+
     }
     void Movement()
     {
@@ -84,16 +88,12 @@ public class Controller : MonoBehaviour
                 float yawCamera = mainCam.transform.rotation.eulerAngles.y;
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, yawCamera, 0), strafeTurnSpeed * Time.fixedDeltaTime);
             }
-
-
-
-
-
-
-
-
         }
-        if(movementType == MovementType.Directional)
+
+
+
+
+        if (movementType == MovementType.Directional)
         {
             moveDirection = new Vector3(inputX, 0, inputZ);
 
@@ -120,11 +120,10 @@ public class Controller : MonoBehaviour
                 inputZ = Input.GetAxis("Vertical");
             }
         }
-        
-        
+
+
         /*
         moveDirection = new Vector3(inputX, 0, inputZ);
-
         if (Input.GetKey(SprintButton))
         {
             mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, sprintFov, Time.deltaTime * 2);
@@ -149,24 +148,32 @@ public class Controller : MonoBehaviour
         }
         */
     }
-    
+
     void InputMove()
     {
-        anim.SetFloat("speed", Vector3.ClampMagnitude(moveDirection, maxSpeed).magnitude, damp, Time.deltaTime * 10);
+        anim.SetFloat("speed", Vector3.ClampMagnitude(moveDirection, maxSpeed).magnitude, damp, Time.deltaTime * 100);
 
     }
     void InputRotation()
     {
         Vector3 rotOfSet = mainCam.transform.TransformDirection(moveDirection);
         rotOfSet.y = 0;
-        model.forward = Vector3.Slerp(model.forward, rotOfSet, Time.deltaTime * rotationSpeed); 
+        model.forward = Vector3.Slerp(model.forward, rotOfSet, Time.deltaTime * rotationSpeed);
     }
-    
+
     void Jump()
     {
-        if (Input.GetKey(jumpButton))
+        
+        if (isGrounded == false)
+        {
+            
+            anim.SetBool("isJumping", true);
+        }
+        else
         {
             rb.AddForce(Vector3.up.normalized * jump);
+            anim.SetBool("isJumping", false);
         }
+          
     }
 }

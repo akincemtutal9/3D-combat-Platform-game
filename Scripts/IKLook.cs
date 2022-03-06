@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IKLook : MonoBehaviour
 {
-
+    
     Animator anim;
     Camera mainCam;
 
