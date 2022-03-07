@@ -1,13 +1,13 @@
-#TO-DO
+# TO-DO
 -Character Jump Animation
 -Character Fall Animation
 -Character Land Animation
 
-#DOING
+# DOING
 -Character Jump Animation
 -Character Fall Animation
 
-#DONE
+# DONE
 -Character Basic Movement On Capsule(WASD)
 -Character Basic Camera
 
