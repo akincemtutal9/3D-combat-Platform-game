@@ -8,7 +8,7 @@
 -Character Fall Animation
 
 # DONE
--Character Basic Movement On Capsule(WASD)
+-Character Basic Movement On Capsule(WASD) <br>
 -Character Basic Camera
 
 -ADD model from (Mixamo)
