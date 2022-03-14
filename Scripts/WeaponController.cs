@@ -6,23 +6,18 @@ public class WeaponController : MonoBehaviour
 {
     bool isStrafe = false;
     Animator anim;
-    
-
     void Start()
     {
         anim = GetComponent<Animator>();    
     }
-
     // Update is called once per frame
     void Update()
     {
-        anim.SetBool("isStrafe", isStrafe);
-        
+        anim.SetBool("isStrafe", isStrafe);   
         if (Input.GetKeyDown(KeyCode.F))
         {
             isStrafe = !isStrafe;
         }
-
         if (isStrafe == true)
         {
             GetComponent<Controller>().movementType = Controller.MovementType.Strafe;
@@ -31,6 +26,5 @@ public class WeaponController : MonoBehaviour
         {
             GetComponent<Controller>().movementType = Controller.MovementType.Directional;
         }
-    
     }
 }
