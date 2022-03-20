@@ -87,6 +87,7 @@ public class Controller : MonoBehaviour
             inputZ = Input.GetAxis("Vertical");
             anim.SetFloat("inputX", inputX, damp, Time.deltaTime * 10000);
             anim.SetFloat("inputZ", inputZ, damp, Time.deltaTime * 10000);
+            Jump();
             var isMoving = inputX != 0 || inputZ != 0;
             if (isMoving)
             {
