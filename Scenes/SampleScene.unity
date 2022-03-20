@@ -1045,8 +1045,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e77dfe6a01a87dd4eb66348a0ecc4210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handWeapon: {fileID: 0}
-  spineWeapon: {fileID: 0}
+  handWeapon: {fileID: 1721335328}
+  spineWeapon: {fileID: 1479667541}
+  attackButton: 323
 --- !u!4 &1206244670 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -1824824446595371411, guid: c9fe026cd82f9554aa1d310951430be0, type: 3}
@@ -1195,15 +1196,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4387981860799782, guid: b3bc4acf37a64d645a5b757d00bb5697, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.060475316
+      value: 0.065
       objectReference: {fileID: 0}
     - target: {fileID: 4387981860799782, guid: b3bc4acf37a64d645a5b757d00bb5697, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.10280442
+      value: 0.199
       objectReference: {fileID: 0}
     - target: {fileID: 4387981860799782, guid: b3bc4acf37a64d645a5b757d00bb5697, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.080286786
+      value: -0.083
       objectReference: {fileID: 0}
     - target: {fileID: 4387981860799782, guid: b3bc4acf37a64d645a5b757d00bb5697, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1281,7 +1282,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1721335329
 Transform:
   m_ObjectHideFlags: 0
