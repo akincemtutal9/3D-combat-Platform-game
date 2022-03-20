@@ -85,9 +85,8 @@ public class Controller : MonoBehaviour
         {
             inputX = Input.GetAxis("Horizontal");   
             inputZ = Input.GetAxis("Vertical");
-            anim.SetFloat("inputX", inputX, damp, Time.deltaTime * 10);
-            anim.SetFloat("inputZ", inputZ, damp, Time.deltaTime * 10);
-            
+            anim.SetFloat("inputX", inputX, damp, Time.deltaTime * 10000);
+            anim.SetFloat("inputZ", inputZ, damp, Time.deltaTime * 10000);
             var isMoving = inputX != 0 || inputZ != 0;
             if (isMoving)
             {
@@ -148,7 +147,7 @@ public class Controller : MonoBehaviour
         {
             if (Input.GetKeyDown(jumpButton))
             {
-               rb.AddForce(Vector3.up * jump);
+               rb.AddForce(Vector3.up * jump , ForceMode.Impulse);
                anim.SetTrigger("Jump");
               
             }
@@ -160,6 +159,5 @@ public class Controller : MonoBehaviour
                anim.SetBool("isGrounded", false);
             }
         }
-    }
-    
+    }    
 }

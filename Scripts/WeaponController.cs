@@ -6,6 +6,9 @@ public class WeaponController : MonoBehaviour
 {
     bool isStrafe = false;
     Animator anim;
+
+    public GameObject handWeapon;
+    public GameObject spineWeapon;
     void Start()
     {
         anim = GetComponent<Animator>();    
@@ -27,4 +30,16 @@ public class WeaponController : MonoBehaviour
             GetComponent<Controller>().movementType = Controller.MovementType.Directional;
         }
     }
+
+    void EquipWeapon()
+    {
+        handWeapon.SetActive(true);
+        spineWeapon.SetActive(false);
+    }
+    void UnEquipWeapon()
+    {
+        spineWeapon.SetActive(true);
+        handWeapon.SetActive(false);
+    }
+
 }
