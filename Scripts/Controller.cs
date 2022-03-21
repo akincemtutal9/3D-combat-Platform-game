@@ -11,8 +11,13 @@ public class Controller : MonoBehaviour
     public float strafeTurnSpeed;
     float normalFov;
     public float sprintFov;
-    bool isGrounded;       
+    bool isGrounded;
+    bool isJumping;
+
+    
     float maxSpeed;
+    public float ySpeed;
+   
     
     [SerializeField] float jump;
     float inputX;
@@ -56,11 +61,12 @@ public class Controller : MonoBehaviour
 
     // Update is called once per frame
     private void LateUpdate()
-    { 
+    {
+        ySpeed = rb.velocity.y;
         isGrounded = Physics.CheckCapsule(cc.bounds.center, new Vector3(cc.bounds.center.x, cc.bounds.min.y - 0.1f, cc.bounds.center.z), 0.18f, groundMask);   
         Movement();
-
-
+        Debug.Log(rb.velocity.y);
+      //velocity vector3 veriyor y sini al
     }
     void Movement()
     {
@@ -71,7 +77,7 @@ public class Controller : MonoBehaviour
             inputZ = Input.GetAxis("Vertical");
             anim.SetFloat("inputX", inputX, damp, Time.deltaTime * 10000);
             anim.SetFloat("inputZ", inputZ, damp, Time.deltaTime * 10000);
-            Jump();
+            //Jump();
             var isMoving = inputX != 0 || inputZ != 0;
             if (isMoving)
             {
@@ -133,16 +139,29 @@ public class Controller : MonoBehaviour
             if (Input.GetKeyDown(jumpButton))
             {
                rb.AddForce(Vector3.up * jump , ForceMode.Impulse);
+               anim.SetBool("isJumping", true);
                anim.SetTrigger("Jump");
-              
+               isJumping = true;
+                
             }
             if (isGrounded){
                 anim.SetBool("isGrounded", true);
+                isGrounded = true;
                 anim.applyRootMotion = true;
-            }
-            else{
-               anim.SetBool("isGrounded", false);
+                anim.SetBool("isJumping", false);
+                isJumping = false;
+                anim.SetBool("isFalling", false);
             }
         }
+        else
+        {
+            anim.SetBool("isGrounded", false);
+            isGrounded = false;
+            if ((isJumping && ySpeed < 0) || ySpeed < -0.4)
+            {
+                anim.SetBool("isFalling", true);
+            }
+        }
+    }        
+        
     }    
-}
