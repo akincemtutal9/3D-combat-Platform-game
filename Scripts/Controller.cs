@@ -4,36 +4,20 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
-   
     public float damp;
     [Range(1, 20)]
-   
     public float rotationSpeed;
     [Range(1, 20)]
     public float strafeTurnSpeed;
-    
-    
     float normalFov;
-    
     public float sprintFov;
-    
-    
-    bool isGrounded;
-    
-    
+    bool isGrounded;       
     float maxSpeed;
     
     [SerializeField] float jump;
-    
     float inputX;
-    
     float inputZ;
-
-
-   
     public Transform model;
-
-
     
     [SerializeField] private LayerMask groundMask;
     
