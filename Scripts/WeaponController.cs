@@ -83,7 +83,6 @@ public class WeaponController : MonoBehaviour
                 attackIndex = 2;
                 anim.SetInteger("attackIndex", attackIndex);
                 anim.SetTrigger("Attack");
-                //       LaunchAttack(hitBoxes[0]);
                 damage = basicDamage;
                 Damage();
             }
@@ -93,7 +92,6 @@ public class WeaponController : MonoBehaviour
                 attackIndex = 0;
                 anim.SetInteger("attackIndex", attackIndex);
                 anim.SetTrigger("Attack");
-                //           LaunchAttack(hitBoxes[0]);
                 damage = qDamage;
                 Damage();
             }
@@ -103,7 +101,6 @@ public class WeaponController : MonoBehaviour
                 attackIndex = 1;
                 anim.SetInteger("attackIndex", attackIndex);
                 anim.SetTrigger("Attack");
-                //         LaunchAttack(hitBoxes[0]);
                 damage = eDamage;
                 Damage();
             }
@@ -117,23 +114,6 @@ public class WeaponController : MonoBehaviour
             }
         }
     }
-    /*
-    public void LaunchAttack(Collider collider)
-    {
-        Collider[] colliders = Physics.OverlapBox(collider.bounds.center, 
-                                             collider.bounds.extents, 
-                                             collider.transform.rotation, 
-                                             LayerMask.GetMask("Hitbox"));
-        foreach(Collider c in colliders)
-        {
-            if (c.transform.root == transform)
-                continue;
-            
-            Debug.Log(c.name);
-        }
-
-    }
-    */
     public void Damage()
     {
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
