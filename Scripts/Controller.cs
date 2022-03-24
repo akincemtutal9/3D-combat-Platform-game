@@ -65,8 +65,16 @@ public class Controller : MonoBehaviour
         ySpeed = rb.velocity.y;
         isGrounded = Physics.CheckCapsule(cc.bounds.center, new Vector3(cc.bounds.center.x, cc.bounds.min.y - 0.1f, cc.bounds.center.z), 0.18f, groundMask);   
         Movement();
-        Debug.Log(rb.velocity.y);
-      //velocity vector3 veriyor y sini al
+       
+        //velocity vector3 veriyor y sini al
+       /*
+        if (isGrounded == false)
+        {
+            Vector3 velocity = moveDirection * horizontalJumpSpeed;
+            velocity.y = ySpeed;
+            rb.MovePosition(velocity * Time.deltaTime);
+        }
+       */ 
     }
     void Movement()
     {
@@ -138,7 +146,9 @@ public class Controller : MonoBehaviour
         {
             if (Input.GetKeyDown(jumpButton))
             {
+               //CSE 364 lecture discussion FORCEMODE.IMPULSE 
                rb.AddForce(Vector3.up * jump , ForceMode.Impulse);
+               //Animator variables
                anim.SetBool("isJumping", true);
                anim.SetTrigger("Jump");
                isJumping = true;
@@ -157,7 +167,7 @@ public class Controller : MonoBehaviour
         {
             anim.SetBool("isGrounded", false);
             isGrounded = false;
-            if ((isJumping && ySpeed < 0) || ySpeed < -0.4)
+            if ((isJumping && ySpeed < 0) || ySpeed < -0.3)
             {
                 anim.SetBool("isFalling", true);
             }
