@@ -11,7 +11,9 @@ public class WeaponController : MonoBehaviour
 
     //Skill Index
     int attackIndex;
-    
+    public float attackRate = 2f;
+    private float nextAttackTime = 0f;
+
     Animator anim;
 
     public Transform attackPoint;
@@ -75,42 +77,50 @@ public class WeaponController : MonoBehaviour
     }
     void Attack()
     {
-        if (isStrafe == true && canAttack == true)
+        if (Time.time >= nextAttackTime)
         {
-            // Basic Attack
-            if (Input.GetKeyDown(attackButton))
+
+            if (isStrafe == true && canAttack == true)
             {
-                attackIndex = 2;
-                anim.SetInteger("attackIndex", attackIndex);
-                anim.SetTrigger("Attack");
-                damage = basicDamage;
-                Damage();
-            }
-            // Q Skill
-            if (Input.GetKeyDown(qSkill))
-            {
-                attackIndex = 0;
-                anim.SetInteger("attackIndex", attackIndex);
-                anim.SetTrigger("Attack");
-                damage = qDamage;
-                Damage();
-            }
-            // E Skill
-            if (Input.GetKeyDown(eSkill))
-            {
-                attackIndex = 1;
-                anim.SetInteger("attackIndex", attackIndex);
-                anim.SetTrigger("Attack");
-                damage = eDamage;
-                Damage();
-            }
-            // R Skill
-            if (Input.GetKeyDown(rSkill))
-            {
-                attackIndex = 3;
-                anim.SetInteger("attackIndex", attackIndex);
-                anim.SetTrigger("Attack");
-                Damage();
+                // Basic Attack
+                if (Input.GetKeyDown(attackButton))
+                {
+                    attackIndex = 2;
+                    anim.SetInteger("attackIndex", attackIndex);
+                    anim.SetTrigger("Attack");
+                    damage = basicDamage;
+                    Damage();
+                    WaitForAttack();
+                }
+                // Q Skill
+                if (Input.GetKeyDown(qSkill))
+                {
+                    attackIndex = 0;
+                    anim.SetInteger("attackIndex", attackIndex);
+                    anim.SetTrigger("Attack");
+                    damage = qDamage;
+                    Damage();
+                    WaitForAttack();
+                }
+                // E Skill
+                if (Input.GetKeyDown(eSkill))
+                {
+                    attackIndex = 1;
+                    anim.SetInteger("attackIndex", attackIndex);
+                    anim.SetTrigger("Attack");
+                    damage = eDamage;
+                    Damage();
+                    WaitForAttack();
+                }
+                // R Skill
+                if (Input.GetKeyDown(rSkill))
+                {
+                    attackIndex = 3;
+                    anim.SetInteger("attackIndex", attackIndex);
+                    anim.SetTrigger("Attack");
+                    Damage();
+                    WaitForAttack();
+                }
             }
         }
     }
@@ -130,5 +140,8 @@ public class WeaponController : MonoBehaviour
         
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-
+    private void WaitForAttack()
+    {
+        nextAttackTime = Time.time + 1f / attackRate;
+    }
 }
