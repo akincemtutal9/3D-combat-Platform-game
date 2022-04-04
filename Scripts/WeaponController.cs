@@ -9,18 +9,25 @@ public class WeaponController : MonoBehaviour
 
 
 
+
+
     //Skill Index
     int attackIndex;
     public float attackRate = 2f;
     private float nextAttackTime = 0f;
+    public float maxMana;
+    public float currentMana;
+    public float manaCost;
 
     Animator anim;
+
+    public HealthManaBar healthManaBar;
 
     public Transform attackPoint;
     public float attackRange;
     public LayerMask enemyLayers;
-
     public int damage;
+
     public int basicDamage = 3;
     public int qDamage = 5;
     public int eDamage = 5;
@@ -41,7 +48,8 @@ public class WeaponController : MonoBehaviour
     //public Collider[] hitBoxes;
     void Start()
     {
-        anim = GetComponent<Animator>();    
+        anim = GetComponent<Animator>();
+        healthManaBar.SetMaxMana(maxMana);
     }
     // Update is called once per frame
     void Update()
@@ -91,6 +99,9 @@ public class WeaponController : MonoBehaviour
                     damage = basicDamage;
                     Damage();
                     WaitForAttack();
+                    currentMana -= 5;
+                    healthManaBar.SetMana(currentMana);
+                
                 }
                 // Q Skill
                 if (Input.GetKeyDown(qSkill))
@@ -101,6 +112,8 @@ public class WeaponController : MonoBehaviour
                     damage = qDamage;
                     Damage();
                     WaitForAttack();
+                    currentMana -= 7;
+                    healthManaBar.SetMana(currentMana);
                 }
                 // E Skill
                 if (Input.GetKeyDown(eSkill))
@@ -111,6 +124,7 @@ public class WeaponController : MonoBehaviour
                     damage = eDamage;
                     Damage();
                     WaitForAttack();
+                    healthManaBar.SetMana(currentMana);
                 }
                 // R Skill
                 if (Input.GetKeyDown(rSkill))
@@ -120,6 +134,7 @@ public class WeaponController : MonoBehaviour
                     anim.SetTrigger("Attack");
                     Damage();
                     WaitForAttack();
+                    healthManaBar.SetMana(currentMana);
                 }
             }
         }

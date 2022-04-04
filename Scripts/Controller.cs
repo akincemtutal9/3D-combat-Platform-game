@@ -16,7 +16,11 @@ public class Controller : MonoBehaviour
 
     
     float maxSpeed;
-    public float ySpeed;
+    
+    //fall speed
+    float ySpeed;
+
+    public float jumpHorizontalSpeed;
    
     
     [SerializeField] float jump;
@@ -67,14 +71,9 @@ public class Controller : MonoBehaviour
         Movement();
        
         //velocity vector3 veriyor y sini al
-       /*
-        if (isGrounded == false)
-        {
-            Vector3 velocity = moveDirection * horizontalJumpSpeed;
-            velocity.y = ySpeed;
-            rb.MovePosition(velocity * Time.deltaTime);
-        }
-       */ 
+       
+       
+        
     }
     void Movement()
     {
@@ -146,11 +145,13 @@ public class Controller : MonoBehaviour
         {
             if (Input.GetKeyDown(jumpButton))
             {
-               //CSE 364 lecture discussion FORCEMODE.IMPULSE 
-               rb.AddForce(Vector3.up * jump , ForceMode.Impulse);
+                anim.SetBool("isJumping", true);
+                anim.SetTrigger("Jump");
+                //CSE 364 lecture discussion FORCEMODE.IMPULSE 
+                rb.AddForce(Vector3.up * jump , ForceMode.Impulse);
                //Animator variables
-               anim.SetBool("isJumping", true);
-               anim.SetTrigger("Jump");
+               //anim.SetBool("isJumping", true);
+               //anim.SetTrigger("Jump");
                isJumping = true;
                 
             }
@@ -169,9 +170,11 @@ public class Controller : MonoBehaviour
             isGrounded = false;
             if ((isJumping && ySpeed < 0) || ySpeed < -0.3)
             {
-                anim.SetBool("isFalling", true);
+                rb.AddForce(Vector3.right);
+                anim.SetBool("isFalling", true);                
             }
         }
-    }        
-        
-    }    
+    }
+
+    
+}    
