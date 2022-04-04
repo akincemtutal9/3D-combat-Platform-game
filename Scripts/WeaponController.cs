@@ -124,7 +124,9 @@ public class WeaponController : MonoBehaviour
                     damage = eDamage;
                     Damage();
                     WaitForAttack();
+                    currentMana -= 7;
                     healthManaBar.SetMana(currentMana);
+                   
                 }
                 // R Skill
                 if (Input.GetKeyDown(rSkill))
@@ -134,6 +136,7 @@ public class WeaponController : MonoBehaviour
                     anim.SetTrigger("Attack");
                     Damage();
                     WaitForAttack();
+                    currentMana -= 7;
                     healthManaBar.SetMana(currentMana);
                 }
             }
