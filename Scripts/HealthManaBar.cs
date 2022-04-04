@@ -7,7 +7,6 @@ public class HealthManaBar : MonoBehaviour
 {
     public Slider slider;
 
-
     public void SetMaxMana(float mana)
     {
         slider.maxValue = mana;

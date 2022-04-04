@@ -7,27 +7,34 @@ public class WeaponController : MonoBehaviour
     bool canAttack = true;
     bool isStrafe = false;
 
-
-
-
-
     //Skill Index
     int attackIndex;
+    
+    // Those variables are using for disable to character spam attack;
     public float attackRate = 2f;
     private float nextAttackTime = 0f;
+    
+    // Our characters max mana
     public float maxMana;
+    // Current mana
     public float currentMana;
+    // Cost of mana it changes according to skills
     public float manaCost;
 
     Animator anim;
 
+    //Class to reach necessary functions
     public HealthManaBar healthManaBar;
-
+    // Object to collide with enemies
     public Transform attackPoint;
+    // Range of our attacks
     public float attackRange;
+    // who to collide with
     public LayerMask enemyLayers;
+    // damage variable 
     public int damage;
 
+    // Damage amounts
     public int basicDamage = 3;
     public int qDamage = 5;
     public int eDamage = 5;
@@ -49,6 +56,7 @@ public class WeaponController : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        // Starts the game with full mana
         healthManaBar.SetMaxMana(maxMana);
     }
     // Update is called once per frame
@@ -142,8 +150,10 @@ public class WeaponController : MonoBehaviour
             }
         }
     }
+    
     public void Damage()
     {
+        // Creates enemy colliders if we hit them we can damage them
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider enemy in hitEnemies)
         {
@@ -151,6 +161,7 @@ public class WeaponController : MonoBehaviour
         }
     }
     
+    // This is function for us the see our attack range in scene
     private void OnDrawGizmosSelected()
     {
         if (attackPoint == null)
@@ -158,6 +169,7 @@ public class WeaponController : MonoBehaviour
         
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
+    // This is the function disables us spam attack;
     private void WaitForAttack()
     {
         nextAttackTime = Time.time + 1f / attackRate;
