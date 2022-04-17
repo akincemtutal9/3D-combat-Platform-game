@@ -7,21 +7,16 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int maxHealth;
     private int currentHealth;
     public Animator anim;
-
-
     void Start()
     {
         currentHealth = maxHealth;
         anim = GetComponent<Animator>();
     }
-
     // Update is called once per frame
     void Update()
-    {
-        
+    {   
 
     }
-
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -32,17 +27,13 @@ public class Enemy : MonoBehaviour
             Die();
         }
     }
-
     public void Die()
     {
         Debug.Log("Enemy died");
-
         // die animation
         anim.SetBool("isDead", true);
-        // disable enemy
+        //disable enemy
         //GetComponent<CapsuleCollider>().enabled = false;
-        GetComponent<CapsuleCollider>().transform.Rotate(new Vector3(0, 90, 0));
         this.enabled = false;
     }
-    
 }

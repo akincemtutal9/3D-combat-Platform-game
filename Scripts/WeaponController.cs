@@ -105,7 +105,7 @@ public class WeaponController : MonoBehaviour
                     anim.SetInteger("attackIndex", attackIndex);
                     anim.SetTrigger("Attack");
                     damage = basicDamage;
-                    Damage();
+                    StartCoroutine(Damage());
                     WaitForAttack();
                     currentMana -= 5;
                     healthManaBar.SetMana(currentMana);
@@ -118,7 +118,7 @@ public class WeaponController : MonoBehaviour
                     anim.SetInteger("attackIndex", attackIndex);
                     anim.SetTrigger("Attack");
                     damage = qDamage;
-                    Damage();
+                    StartCoroutine(Damage());
                     WaitForAttack();
                     currentMana -= 7;
                     healthManaBar.SetMana(currentMana);
@@ -130,7 +130,7 @@ public class WeaponController : MonoBehaviour
                     anim.SetInteger("attackIndex", attackIndex);
                     anim.SetTrigger("Attack");
                     damage = eDamage;
-                    Damage();
+                    StartCoroutine(Damage());
                     WaitForAttack();
                     currentMana -= 7;
                     healthManaBar.SetMana(currentMana);
@@ -142,7 +142,7 @@ public class WeaponController : MonoBehaviour
                     attackIndex = 3;
                     anim.SetInteger("attackIndex", attackIndex);
                     anim.SetTrigger("Attack");
-                    Damage();
+                    StartCoroutine(Damage());
                     WaitForAttack();
                     currentMana -= 7;
                     healthManaBar.SetMana(currentMana);
@@ -151,12 +151,13 @@ public class WeaponController : MonoBehaviour
         }
     }
     
-    public void Damage()
+    public IEnumerator Damage()
     {
         // Creates enemy colliders if we hit them we can damage them
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider enemy in hitEnemies)
         {
+            yield return new WaitForSeconds(0.5f);
             enemy.GetComponent<Enemy>().TakeDamage(damage);
         }
     }
