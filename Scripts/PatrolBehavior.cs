@@ -5,14 +5,13 @@ using UnityEngine.AI;
 
 public class PatrolBehavior : StateMachineBehaviour
 {
-
     float timer;
     List<Transform> wayPoints = new List<Transform>();
     NavMeshAgent agent;
 
     Transform player;
 
-    float chaseRange = 10;
+    float chaseRange = 15;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -25,7 +24,6 @@ public class PatrolBehavior : StateMachineBehaviour
 
         agent = animator.GetComponent<NavMeshAgent>();
         agent.SetDestination(wayPoints[0].position);
-
         player = GameObject.FindGameObjectWithTag("Player").transform;
         
     }

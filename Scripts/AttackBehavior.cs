@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AttackBehavior : StateMachineBehaviour
 {
     Transform player;
-    
+    NavMeshAgent agent;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -21,6 +22,10 @@ public class AttackBehavior : StateMachineBehaviour
         if (distance > 15)
         {
             animator.SetBool("isAttacking", false);
+        }
+        else
+        {
+            animator.SetBool("isAttacking", true);
         }
     }
 
