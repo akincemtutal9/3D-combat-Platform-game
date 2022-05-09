@@ -128,7 +128,6 @@ public class Controller : MonoBehaviour
             }
         }
     }
-
     void InputMove()
     {
         anim.SetFloat("speed", Vector3.ClampMagnitude(moveDirection, maxSpeed).magnitude, damp, Time.deltaTime * 10);
@@ -143,25 +142,25 @@ public class Controller : MonoBehaviour
     {
         if (isGrounded)
         {
+            anim.SetBool("isGrounded", true);
+            isGrounded = true;
+            //anim.applyRootMotion = false;
+            anim.SetBool("isJumping", false);
+            isJumping = false;
+            anim.SetBool("isFalling", false);
             if (Input.GetKeyDown(jumpButton))
             {
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+
+                }
+
                 anim.SetBool("isJumping", true);
                 anim.SetTrigger("Jump");
                 //CSE 364 lecture discussion FORCEMODE.IMPULSE 
                 rb.AddForce(Vector3.up * jump , ForceMode.Impulse);
-               //Animator variables
-               //anim.SetBool("isJumping", true);
-               //anim.SetTrigger("Jump");
-               isJumping = true;
-                
-            }
-            if (isGrounded){
-                anim.SetBool("isGrounded", true);
-                isGrounded = true;
-                anim.applyRootMotion = true;
-                anim.SetBool("isJumping", false);
-                isJumping = false;
-                anim.SetBool("isFalling", false);
+                //Animator variables
+                isJumping = true;                
             }
         }
         else
@@ -175,6 +174,4 @@ public class Controller : MonoBehaviour
             }
         }
     }
-
-    
 }    

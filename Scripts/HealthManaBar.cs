@@ -5,16 +5,24 @@ using UnityEngine.UI;
 
 public class HealthManaBar : MonoBehaviour
 {
-    public Slider slider;
-
+    public Slider sliderMana;
+    public Slider sliderHealth;
     public void SetMaxMana(float mana)
     {
-        slider.maxValue = mana;
-        slider.value = mana;
+        sliderMana.maxValue = mana;
+        sliderMana.value = mana;
     }
    public void SetMana(float mana)
     {
-        slider.value = mana;    
+        sliderMana.value = mana;    
     }
-    
+    public void SetMaxHealth(float health)
+    {
+        sliderHealth.maxValue = health;
+    }
+    public void SetHealth(float health)
+    {
+        sliderHealth.value = health;
+    }
+
 }

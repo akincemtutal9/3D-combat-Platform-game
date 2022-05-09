@@ -63,6 +63,9 @@ public class WeaponController : MonoBehaviour
     void Update()
     {
         SwitchMovement();
+    }
+    void FixedUpdate()
+    {
         Attack();
     }
     void EquipWeapon()
@@ -175,4 +178,10 @@ public class WeaponController : MonoBehaviour
     {
         nextAttackTime = Time.time + 1f / attackRate;
     }
+    public IEnumerator increaseMana()
+    {
+        yield return new WaitForSeconds(1);
+        currentMana += 1;
+    }
+
 }
