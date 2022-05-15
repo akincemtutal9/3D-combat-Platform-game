@@ -11,18 +11,12 @@ public class Enemy : MonoBehaviour
     {
         currentHealth = maxHealth;
     }
-    private void Update()
-    {
-        Die();
-
-    }
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         // play hurt animation
         if (currentHealth <= 0)
         {
-            Invoke(nameof(DestroyEnemy), 0.5f);
             Die();
         }
     }
@@ -30,18 +24,8 @@ public class Enemy : MonoBehaviour
     {
         Debug.Log("Enemy died");
         //disable enemy
-        StartCoroutine(DestroyCollider());
-        this.enabled = false;
         isDead = true;
-    }
-    public IEnumerator DestroyEnemy()
-    {
-        yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
-    }
-    public IEnumerator DestroyCollider()
-    {
-        yield return new WaitForSeconds(5f);
         GetComponent<CapsuleCollider>().enabled = false;
+        this.enabled = false;
     }
 }

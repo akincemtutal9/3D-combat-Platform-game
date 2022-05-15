@@ -108,7 +108,7 @@ public class WeaponController : MonoBehaviour
                     anim.SetInteger("attackIndex", attackIndex);
                     anim.SetTrigger("Attack");
                     damage = basicDamage;
-                    StartCoroutine(Damage());
+                    Damage();
                     WaitForAttack();
                     currentMana -= 5;
                     healthManaBar.SetMana(currentMana);
@@ -121,7 +121,7 @@ public class WeaponController : MonoBehaviour
                     anim.SetInteger("attackIndex", attackIndex);
                     anim.SetTrigger("Attack");
                     damage = qDamage;
-                    StartCoroutine(Damage());
+                    Damage();
                     WaitForAttack();
                     currentMana -= 7;
                     healthManaBar.SetMana(currentMana);
@@ -133,7 +133,7 @@ public class WeaponController : MonoBehaviour
                     anim.SetInteger("attackIndex", attackIndex);
                     anim.SetTrigger("Attack");
                     damage = eDamage;
-                    StartCoroutine(Damage());
+                    Damage();
                     WaitForAttack();
                     currentMana -= 7;
                     healthManaBar.SetMana(currentMana);
@@ -145,7 +145,7 @@ public class WeaponController : MonoBehaviour
                     attackIndex = 3;
                     anim.SetInteger("attackIndex", attackIndex);
                     anim.SetTrigger("Attack");
-                    StartCoroutine(Damage());
+                    Damage();
                     WaitForAttack();
                     currentMana -= 7;
                     healthManaBar.SetMana(currentMana);
@@ -153,24 +153,21 @@ public class WeaponController : MonoBehaviour
             }
         }
     }
-    
-    public IEnumerator Damage()
+    public void Damage()
     {
         // Creates enemy colliders if we hit them we can damage them
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider enemy in hitEnemies)
         {
-            yield return new WaitForSeconds(0.5f);
-            enemy.GetComponent<Enemy>().TakeDamage(damage);
+            Debug.Log("We hit enemy " + enemy.name);
+            enemy.GetComponent<EnemySoldier>().TakeDamage(damage);
         }
     }
-    
     // This is function for us the see our attack range in scene
     private void OnDrawGizmosSelected()
     {
         if (attackPoint == null)
-            return;
-        
+            return;   
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
     // This is the function disables us spam attack;
@@ -183,5 +180,4 @@ public class WeaponController : MonoBehaviour
         yield return new WaitForSeconds(1);
         currentMana += 1;
     }
-
 }
