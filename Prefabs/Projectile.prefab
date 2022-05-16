@@ -125,4 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2e104dcbc4ddd43842747b19ea8fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactEffect: {fileID: 8566316504453719887, guid: ddf8a91c799ccbb43b3b7641b80521f8, type: 3}
+  impactEffect: {fileID: 1170647774315830, guid: e5bbbbc7c93d27d4f8dd9a9e7b861bfe, type: 3}
+  radius: 3
+  damageAmount: 50
+  pm: {fileID: 6872138940301375666, guid: 03a06a67d1e18084e90f5954d9c7d73e, type: 3}

@@ -152,7 +152,6 @@ public class Controller : MonoBehaviour
                 anim.SetBool("isFalling", false);
                 if (Input.GetKey(jumpButton))
                 {
-
                     anim.SetBool("isJumping", true);
                     anim.SetTrigger("Jump");
                     //CSE 364 lecture discussion FORCEMODE.IMPULSE 
