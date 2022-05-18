@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemySoldier : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class EnemySoldier : MonoBehaviour
     public bool isDead;
     public GameObject projectile;
     public Transform projectilePoint;
+    public Slider healthBar;
+    
     public Animator anim;
     public CapsuleCollider cc;
     private void Start()
@@ -16,10 +19,11 @@ public class EnemySoldier : MonoBehaviour
         currentHealth = enemyHealth;
         anim = GetComponent<Animator>();
         cc = GetComponent<CapsuleCollider>();
+        healthBar.value = enemyHealth;
     }
     private void Update()
     {
-        
+        //healthBar.value = currentHealth;
     }
     public void Shoot()
     {
@@ -30,6 +34,7 @@ public class EnemySoldier : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        healthBar.value -= damage;
         anim.SetTrigger("damage");
         if (currentHealth <= 0)
         {

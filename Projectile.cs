@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour
                 //FindObjectOfType<PlayerManager>()
             }
         }
-        //Destroy(gameObject); 
+        GetComponent<SphereCollider>().enabled = false;
         this.enabled = false;
     }
 

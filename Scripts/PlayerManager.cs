@@ -23,12 +23,11 @@ public class PlayerManager : MonoBehaviour
         
         if (isDead)
         {
-            //display game over screen
-            SceneManager.LoadScene("SampleScene");
-        
+            //display game over screen in next week
+            SceneManager.LoadScene("SampleScene");   
         }
+        Respawn();
     }
-
     public IEnumerator TakeDamage(int damage)
     {
         HP -= damage;
@@ -37,7 +36,13 @@ public class PlayerManager : MonoBehaviour
         {
             isDead = true;
         }
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         bloodOverlay.SetActive(false);
     }
+    public void Respawn()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+        SceneManager.LoadScene("SampleScene");
+    }
+    
 }
