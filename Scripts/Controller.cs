@@ -73,7 +73,7 @@ public class Controller : MonoBehaviour
                 Vector3 velocity = moveDirection * jumpHorizontalSpeed;
                 velocity.y = ySpeed;
                 velocity = transform.forward;
-                rb.MovePosition(rb.position += velocity * 2.5f * Time.deltaTime);
+                rb.MovePosition(rb.position += velocity * jumpHorizontalSpeed * Time.deltaTime);
             }
         }
 

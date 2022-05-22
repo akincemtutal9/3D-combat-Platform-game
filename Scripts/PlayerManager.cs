@@ -9,6 +9,8 @@ public class PlayerManager : MonoBehaviour
     public static bool isDead;
     public TextMeshProUGUI playerHealthText;
     public GameObject bloodOverlay;
+
+    public Controller player;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,7 @@ public class PlayerManager : MonoBehaviour
     {
         playerHealthText.text = "+" + HP;
         
+
         if (isDead)
         {
             //display game over screen in next week

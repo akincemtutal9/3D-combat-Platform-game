@@ -8,6 +8,6 @@ public class WinBox : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         GameObject.FindGameObjectsWithTag("Player");
-        StartCoroutine(timer.Finish());
+        StartCoroutine(timer.GameOver());
     }
 }
