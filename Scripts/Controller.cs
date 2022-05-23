@@ -70,7 +70,7 @@ public class Controller : MonoBehaviour
         {
             if (moveDirection != Vector3.zero)
             {
-                Vector3 velocity = moveDirection * jumpHorizontalSpeed;
+                Vector3 velocity = moveDirection * jumpHorizontalSpeed; 
                 velocity.y = ySpeed;
                 velocity = transform.forward;
                 rb.MovePosition(rb.position += velocity * jumpHorizontalSpeed * Time.deltaTime);
