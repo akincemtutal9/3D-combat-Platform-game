@@ -14,6 +14,7 @@ public class Timer : MonoBehaviour
     private string endTime;
 
     public GameOverScript gameOver;
+    public PlayerManager pm;
 
 
     // Start is called before the first frame update
@@ -32,12 +33,14 @@ public class Timer : MonoBehaviour
         isGameFinished = true;
         timerText.color = Color.yellow;
         yield return new WaitForSeconds(3f);
+        
+        
         gameOver.Setup();
         //SceneManager.LoadScene("SampleScene");
     }
     public void TimeCounter()
     {
-        if (isGameFinished == true)
+        if (isGameFinished == true || pm.GetHP() <= 0)
         {
             return;
         }
@@ -45,13 +48,15 @@ public class Timer : MonoBehaviour
         minutes = ((int)time / 60).ToString();
         seconds = (time % 60).ToString("f2");
         timerText.text = minutes + ":" + seconds;
-        
-        endTime = minutes + ":" + seconds;
+
         //float f = float.Parse(s, CultureInfo.InvariantCulture);
     }
-    public string GetEndTime()
+    public void StopTimer()
     {
-        return endTime;
+        if (isGameFinished == true && pm.GetHP() <= 0)
+        {
+            return;
+        }
     }
 
 }

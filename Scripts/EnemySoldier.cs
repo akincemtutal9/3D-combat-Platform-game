@@ -50,5 +50,15 @@ public class EnemySoldier : MonoBehaviour
         isDead = true;
         GetComponent<CapsuleCollider>().enabled = false;
         this.enabled = false;
+        StartCoroutine(DieAfterFiveSeconds());
     }
+
+    private IEnumerator DieAfterFiveSeconds()
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(gameObject);
+
+
+    }
+
 }

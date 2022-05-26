@@ -9,8 +9,9 @@ public class PlayerManager : MonoBehaviour
     public static bool isDead;
     public TextMeshProUGUI playerHealthText;
     public GameObject bloodOverlay;
-
-    public Controller player;
+    public Timer timer;
+    public GameOverScript gameOver;
+    public Controller controller;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +23,20 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         playerHealthText.text = "+" + HP;
-        
-
-        if (isDead)
+        if (GetYSpeed() < -30 || GetHP() < 0 )
         {
-            //display game over screen in next week
-            SceneManager.LoadScene("SampleScene");   
+            gameOver.Setup();
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+
+        if (isDead && HP<=0)
+        {
+            timer.GameOver();
+            //SceneManager.LoadScene("SampleScene");   
         }
         Respawn();
     }
@@ -47,5 +56,12 @@ public class PlayerManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R))
         SceneManager.LoadScene("SampleScene");
     }
-    
+    public float GetHP()
+    {
+        return HP;
+    }
+    public float GetYSpeed()
+    {
+        return controller.GetYSpeed();
+    }
 }

@@ -112,7 +112,8 @@ public class WeaponController : MonoBehaviour
                     WaitForAttack();
                     currentMana -= 5;
                     healthManaBar.SetMana(currentMana);
-                
+                    FindObjectOfType<AudioManager>().Play("Jump");
+
                 }
                 // Q Skill
                 if (Input.GetKeyDown(qSkill))
@@ -125,6 +126,7 @@ public class WeaponController : MonoBehaviour
                     WaitForAttack();
                     currentMana -= 7;
                     healthManaBar.SetMana(currentMana);
+                    FindObjectOfType<AudioManager>().Play("Jump");
                 }
                 // E Skill
                 if (Input.GetKeyDown(eSkill))
@@ -137,7 +139,7 @@ public class WeaponController : MonoBehaviour
                     WaitForAttack();
                     currentMana -= 7;
                     healthManaBar.SetMana(currentMana);
-                   
+                    FindObjectOfType<AudioManager>().Play("Jump");
                 }
                 // R Skill
                 if (Input.GetKeyDown(rSkill))
@@ -149,6 +151,7 @@ public class WeaponController : MonoBehaviour
                     WaitForAttack();
                     currentMana -= 7;
                     healthManaBar.SetMana(currentMana);
+                    FindObjectOfType<AudioManager>().Play("Jump");
                 }
             }
         }

@@ -30,6 +30,8 @@ public class Controller : MonoBehaviour
 
     [SerializeField] private LayerMask groundMask;
 
+    public GameOverScript gameOver;
+
     Animator anim;
     Vector3 moveDirection;
     Camera mainCam;
@@ -48,6 +50,7 @@ public class Controller : MonoBehaviour
 
     public MovementType movementType;
     bool isStrafeMoving;
+    public PlayerManager pm;
 
     void Start()
     {
@@ -59,12 +62,16 @@ public class Controller : MonoBehaviour
     }
 
     // Update is called once per frame
+    public float GetYSpeed()
+    {
+        return ySpeed;
+    }
     private void FixedUpdate()
     {
         ySpeed = rb.velocity.y;
         isGrounded = Physics.CheckCapsule(cc.bounds.center, new Vector3(cc.bounds.center.x, cc.bounds.min.y - 0.1f, cc.bounds.center.z), 0.18f, groundMask);
         Movement();
-
+        
         //velocity vector3 veriyor y sini al
         if (isGrounded == false)
         {
@@ -76,7 +83,7 @@ public class Controller : MonoBehaviour
                 rb.MovePosition(rb.position += velocity * jumpHorizontalSpeed * Time.deltaTime);
             }
         }
-
+        
         void Movement()
         {
 
@@ -156,6 +163,8 @@ public class Controller : MonoBehaviour
                     anim.SetTrigger("Jump");
                     //CSE 364 lecture discussion FORCEMODE.IMPULSE 
                     rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
+                    FindObjectOfType<AudioManager>().Play("Jump");
+                    
                     //Animator variables
                     isJumping = true;
                 }
